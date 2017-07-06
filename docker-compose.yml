@@ -1,0 +1,49 @@
+version: "2"
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile-nginx
+        ports: 
+            - "80:80"
+        volumes:
+            - ./app:/app
+        depends_on:
+            - composer
+            - php-fpm
+            - mysql
+            - db-migration
+    composer:
+       build:
+           context: .
+           dockerfile: Dockerfile-composer
+       volumes:
+           - ./app:/app
+    php-fpm:
+        build:
+            context: .
+            dockerfile: Dockerfile-php-fpm
+        volumes:
+            - ./app:/app
+    mysql:
+        build:
+            context: .
+            dockerfile: Dockerfile-mysql
+        ports: 
+            - "3307:3306"
+        volumes:
+            - ./dbData:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: yii2basic
+    db-migration:
+        build:
+            context: .
+            dockerfile: Dockerfile-db-migration
+        volumes:
+            - ./app:/app
+        depends_on:
+            - composer
+            - mysql
+        restart: on-failure
+        
