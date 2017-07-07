@@ -7,7 +7,7 @@ services:
         ports: 
             - "80:80"
         volumes:
-            - ./app:/app
+            - ./app:/app:rw
         depends_on:
             - php-fpm
     php-fpm:
@@ -15,7 +15,7 @@ services:
             context: ./docker
             dockerfile: Dockerfile-php-fpm
         volumes:
-            - ./app:/app
+            - ./app:/app:rw
         depends_on:
             - init-app
     init-app:
@@ -23,7 +23,7 @@ services:
             context: ./docker
             dockerfile: Dockerfile-init-app
         volumes:
-            - ./app:/app
+            - ./app:/app:rw
         depends_on:
             - composer
             - mysql
@@ -33,7 +33,7 @@ services:
            context: ./docker
            dockerfile: Dockerfile-composer
        volumes:
-           - ./app:/app
+           - ./app:/app:rw
     mysql:
         build:
             context: ./docker
@@ -41,8 +41,7 @@ services:
         ports: 
             - "3307:3306"
         volumes:
-            - ./docker/runtime/mysql:/var/lib/mysql
+            - ./docker/runtime/mysql:/var/lib/mysql:rw
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: yii2advanced
         

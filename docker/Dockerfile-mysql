@@ -2,4 +2,6 @@ FROM mysql:5.7
 
 VOLUME /var/lib/mysql
 
+ADD ./dbinit.sql /docker-entrypoint-initdb.d/dbinit.sql
+
 CMD ["mysqld"]
