@@ -1,3 +1,3 @@
-# README #
+# Yii 2 Ivan Project Template
 
-Yii advanced template with docker
+Шаблон проекта основанный на Yii2advanced, обёрнутый в Docker.

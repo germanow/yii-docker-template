@@ -17,6 +17,6 @@ RUN docker-php-ext-install pdo_mysql
 VOLUME /app
 
 WORKDIR /app
-
-CMD ["/bin/sh", "-c", "/app/yii migrate/up --interactive=0 2>/dev/null"]
+# 2>/dev/null
+CMD ["/bin/sh", "-c", "echo Migration timeout 10 sec && sleep 10 && /app/init --env=Development --overwrite=All && /app/yii migrate/up --interactive=0"]
 
