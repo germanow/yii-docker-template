@@ -17,11 +17,11 @@ services:
         volumes:
             - ./app:/app
         depends_on:
-            - db-migration
-    db-migration:
+            - init-app
+    init-app:
         build:
             context: ./docker
-            dockerfile: Dockerfile-db-migration
+            dockerfile: Dockerfile-init-app
         volumes:
             - ./app:/app
         depends_on:
