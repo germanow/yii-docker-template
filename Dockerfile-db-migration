@@ -17,6 +17,5 @@ RUN docker-php-ext-install pdo_mysql
 VOLUME /app
 
 WORKDIR /app
-# 2>/dev/null
-CMD ["/bin/sh", "-c", "echo Migration timeout 10 sec && sleep 10 && /app/init --env=Development --overwrite=All && /app/yii migrate/up --interactive=0"]
-
+#Development enviroment init and migrate/up
+CMD ["/bin/sh", "-c", "echo Migration wait 20 sec && sleep 20 && /app/yii migrate/up --interactive=0 && /app/init --env=Development --overwrite=No "]

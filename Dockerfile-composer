@@ -6,6 +6,6 @@ FROM composer
 VOLUME /app
 
 WORKDIR /app
-
-CMD ["composer", "install"]
+#Для Development enviroment
+CMD ["composer", "install", "--prefer-dist"]
 
