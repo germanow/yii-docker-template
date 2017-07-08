@@ -4,5 +4,5 @@ VOLUME /app
 
 WORKDIR /app
 #Для Development enviroment
-CMD ["composer", "install", "--prefer-dist"]
+CMD ["/bin/sh", "-c", "composer install --prefer-dist && composer update --lock --prefer-dist"]
 
