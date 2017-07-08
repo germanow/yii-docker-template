@@ -7,7 +7,8 @@ services:
         ports: 
             - "80:80"
         volumes:
-            - ./app:/app:rw
+            - ./app:/app
+            - ./docker/nginx.conf.d:/etc/nginx/conf.d
         depends_on:
             - php-fpm
     php-fpm:
@@ -15,15 +16,24 @@ services:
             context: ./docker
             dockerfile: Dockerfile-php-fpm
         volumes:
-            - ./app:/app:rw
+            - ./app:/app
+        depends_on:
+            - test-app
+    test-app:
+        build:
+            context: ./docker
+            dockerfile: Dockerfile-test-app
+        volumes:
+            - ./app:/app
         depends_on:
             - init-app
+        restart: on-failure
     init-app:
         build:
             context: ./docker
             dockerfile: Dockerfile-init-app
         volumes:
-            - ./app:/app:rw
+            - ./app:/app
         depends_on:
             - composer
             - mysql
@@ -33,7 +43,7 @@ services:
            context: ./docker
            dockerfile: Dockerfile-composer
        volumes:
-           - ./app:/app:rw
+           - ./app:/app
     mysql:
         build:
             context: ./docker
@@ -41,7 +51,8 @@ services:
         ports: 
             - "3307:3306"
         volumes:
-            - ./docker/runtime/mysql:/var/lib/mysql:rw
+            - ./docker/runtime/mysql:/var/lib/mysql
+            - ./docker/mysql.conf.d:/etc/mysql/conf.d
         environment:
             MYSQL_ROOT_PASSWORD: root
         

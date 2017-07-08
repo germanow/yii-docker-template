@@ -40,6 +40,7 @@ return [
         'setExecutable' => [
             'yii',
             'yii_test',
+            'yii_test_migrate',
         ],
         'setCookieValidationKey' => [
             'backend/config/main-local.php',
