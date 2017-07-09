@@ -1,0 +1,9 @@
+FROM mysql:5.7
+
+VOLUME /var/lib/mysql
+
+VOLUME /etc/mysql/conf.d
+
+ADD ./dbinit.sql /docker-entrypoint-initdb.d/dbinit.sql
+
+CMD ["mysqld"]

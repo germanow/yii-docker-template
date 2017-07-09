@@ -2,29 +2,29 @@ version: "2"
 services:
     nginx:
         build:
-            context: ./docker
+            context: ./docker/dev
             dockerfile: Dockerfile-nginx
         ports: 
             - "80:80"
         volumes:
             - ./app:/app
-            - ./docker/nginx.conf.d:/etc/nginx/conf.d
+            - ./docker/dev/nginx.conf.d:/etc/nginx/conf.d
         depends_on:
             - php-fpm
     nginx-test:
         build:
-            context: ./docker
+            context: ./docker/dev
             dockerfile: Dockerfile-nginx-test
         ports: 
             - "8080:80"
         volumes:
             - ./app:/app
-            - ./docker/nginx-test.conf.d:/etc/nginx/conf.d
+            - ./docker/dev/nginx-test.conf.d:/etc/nginx/conf.d
         depends_on:
             - test-app
     php-fpm:
         build:
-            context: ./docker
+            context: ./docker/dev
             dockerfile: Dockerfile-php-fpm
         volumes:
             - ./app:/app
@@ -32,7 +32,7 @@ services:
             - test-app
     test-app:
         build:
-            context: ./docker
+            context: ./docker/dev
             dockerfile: Dockerfile-test-app
         volumes:
             - ./app:/app
@@ -42,7 +42,7 @@ services:
         restart: on-failure
     init-app:
         build:
-            context: ./docker
+            context: ./docker/dev
             dockerfile: Dockerfile-init-app
         volumes:
             - ./app:/app
@@ -52,19 +52,19 @@ services:
         restart: on-failure
     composer:
        build:
-           context: ./docker
+           context: ./docker/dev
            dockerfile: Dockerfile-composer
        volumes:
            - ./app:/app
     mysql:
         build:
-            context: ./docker
+            context: ./docker/dev
             dockerfile: Dockerfile-mysql
         ports: 
             - "3307:3306"
         volumes:
             - ./docker/runtime/mysql:/var/lib/mysql
-            - ./docker/mysql.conf.d:/etc/mysql/conf.d
+            - ./docker/dev/mysql.conf.d:/etc/mysql/conf.d
         environment:
             MYSQL_ROOT_PASSWORD: root
     selenium:

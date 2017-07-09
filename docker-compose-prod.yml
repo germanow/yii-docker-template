@@ -1,0 +1,52 @@
+version: "2"
+services:
+    nginx:
+        build:
+            context: ./docker/prod
+            dockerfile: Dockerfile-nginx
+        ports: 
+            - "80:80"
+        volumes:
+            - ./app:/app
+            - ./docker/prod/nginx.conf.d:/etc/nginx/conf.d
+        depends_on:
+            - php-fpm
+        restart: on-failure 
+    php-fpm:
+        build:
+            context: ./docker/prod
+            dockerfile: Dockerfile-php-fpm
+        volumes:
+            - ./app:/app
+        depends_on:
+            - init-app
+        restart: on-failure 
+    init-app:
+        build:
+            context: ./docker/prod
+            dockerfile: Dockerfile-init-app
+        volumes:
+            - ./app:/app
+        depends_on:
+            - composer
+            - mysql
+        restart: on-failure
+    composer:
+        build:
+            context: ./docker/prod
+            dockerfile: Dockerfile-composer
+        volumes:
+           - ./app:/app
+        restart: on-failure   
+    mysql:
+        build:
+            context: ./docker/prod
+            dockerfile: Dockerfile-mysql
+        ports: 
+            - "3307:3306"
+        volumes:
+            - ./docker/runtime/mysql:/var/lib/mysql
+            - ./docker/prod/mysql.conf.d:/etc/mysql/conf.d
+        restart: on-failure 
+        env_file: ./docker/prod/.env
+            

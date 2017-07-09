@@ -1,0 +1,8 @@
+FROM composer:1.4
+
+VOLUME /app
+
+WORKDIR /app
+#Для Prod enviroment
+CMD ["/bin/sh", "-c", "composer install --prefer-dist --no-dev --optimize-autoloader --no-progress && composer update --lock --prefer-dist --no-dev --optimize-autoloader --no-progress"]
+
