@@ -27,7 +27,7 @@
 
 Сконфигурировать гит:
 
-```git config --global core.autocrlf false)```
+```git config --global core.autocrlf false```
 
 Скачать данный репозиторий:
 
