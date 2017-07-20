@@ -21,6 +21,26 @@
 
 ```127.0.0.1	backend```
 
+## Установка Windows
+
+Скачать docker toolbox для win 7 или установщик для windows 10.
+
+Сконфигурировать гит:
+
+```git config --global core.autocrlf false)```
+
+Скачать данный репозиторий:
+
+```git clone git@bitbucket.org:germanow/yii-docker-template.git```
+
+Посмотреть ip для docker:
+
+```docker-machine ip```
+
+Прописать в файле /etc/hosts:
+
+```<docker-machine>	backend```
+
 ## Запуск
 
 Первый запуск выполняется командой (может занять некоторое время):
