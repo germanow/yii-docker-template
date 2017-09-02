@@ -6,6 +6,12 @@
 
 ```docker-compose -f docker-compose-prod.yml up --build```
 
+# Внимание *-local.php не перезаписываются на Prod.
+
+Необходимо принудительно делать перезапись:
+
+```/app/init --env=Production --overwrite=All```
+
 Основные контейнер ```mysql```,```nginx```, ```php-fpm```.
 
 Вспомогательные ```composer``` и ```init-app``` запускаются один раз и умирают сразу после выполнения своих функций. 
