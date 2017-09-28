@@ -11,15 +11,13 @@ services:
             - ./docker/dev/nginx.conf.d:/etc/nginx/conf.d
         depends_on:
             - php-fpm
-    nginx-test:
+    nginx-test-frontend:
         build:
             context: ./docker/dev
-            dockerfile: Dockerfile-nginx-test
-        ports: 
-            - "8080:80"
+            dockerfile: Dockerfile-nginx-test-frontend
         volumes:
             - ./app:/app
-            - ./docker/dev/nginx-test.conf.d:/etc/nginx/conf.d
+            - ./docker/dev/nginx-test-frontend.conf.d:/etc/nginx/conf.d
         depends_on:
             - test-app
     php-fpm:
