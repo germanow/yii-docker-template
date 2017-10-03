@@ -1,5 +1,6 @@
 <?php
 return [
+    'name' => 'Project name',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -12,8 +13,9 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager'
         ],
     ],
 ];

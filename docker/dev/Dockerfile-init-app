@@ -15,4 +15,4 @@ VOLUME /app
 
 WORKDIR /app
 #Development enviroment init and migrate/up
-CMD ["/bin/sh", "-c", "echo Migration wait 15 sec && sleep 15 && /app/init --env=Development --overwrite=All && /app/yii migrate/up --interactive=0"]
+CMD ["/bin/sh", "-c", "echo Migration wait 15 sec && sleep 15 && /app/init --env=Development --overwrite=All && /app/yii migrate/up --interactive=0 && /app/yii rbac/init"]

@@ -12,6 +12,10 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'assetManager' => [
+            'forceCopy' => YII_DEBUG ? true : false,
+            'appendTimestamp' => true
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
@@ -29,7 +33,7 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning','profile'],
                 ],
             ],
         ],

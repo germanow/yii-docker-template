@@ -14,12 +14,25 @@ if (!YII_ENV_TEST) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
+        'allowedIPs' => ['*']
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
+        'allowedIPs' => ['*']
     ];
+    $config['components']['assetManager']['hashCallback'] = function($path){
+    $mostRecentFileMTime = 0;
+    $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path), RecursiveIteratorIterator::CHILD_FIRST);
+    foreach ($iterator as $fileinfo) {
+        if ($fileinfo->isFile() && $fileinfo->getMTime() > $mostRecentFileMTime) {
+            $mostRecentFileMTime = $fileinfo->getMTime();
+        }
+    }
+    $path = (is_file($path) ? dirname($path) : $path) . $mostRecentFileMTime;
+    return sprintf('%x', crc32($path . Yii::getVersion()));
+    };
 }
 
 return $config;

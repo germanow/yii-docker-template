@@ -6,26 +6,32 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\classes\MyUploadedFile;
+use yii\helpers\ArrayHelper;
 
 /**
- * User model
- *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
+* User model
+*
+* @property integer $id
+* @property string $name
+* @property string $password_hash
+* @property string $password_reset_token
+* @property string $email
+* @property string $auth_key
+* @property integer $status
+* @property integer $created_at
+* @property integer $updated_at
+* @property string $password write-only password - setPassword($pass)
+* @property string $photo md5 checksum of file
  */
 class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_ACTIVE = 10;
 
+    //Роли пользователя
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
 
     /**
      * @inheritdoc
@@ -73,16 +79,22 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds user by username
+     * Finds user by email
      *
-     * @param string $username
+     * @param string $email
      * @return static|null
      */
-    public static function findByUsername($username)
+    public static function findByEmail($email, $role = self::ROLE_USER)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        $user = static::find()->where(['email' => $email, 'status' => static::STATUS_ACTIVE])->one();
+        if(!isset($user)){
+            return null;
+        }
+        if(Yii::$app->authManager->checkAccess($user->id, $role)){
+            return $user;
+        }
     }
-
+    
     /**
      * Finds user by password reset token
      *
@@ -97,7 +109,7 @@ class User extends ActiveRecord implements IdentityInterface
 
         return static::findOne([
             'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
+            'status' => static::STATUS_ACTIVE,
         ]);
     }
 
@@ -185,5 +197,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+    
+    public function getPhotoLink(){
+        return MyUploadedFile::hashToUrl($this->photo, 'jpg');
     }
 }
