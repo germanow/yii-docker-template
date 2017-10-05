@@ -21,6 +21,14 @@
 
 ```127.0.0.1	backend```
 
+```127.0.0.1	file```
+
+```127.0.0.1	image```
+
+Ввести команду:
+
+```cat .env.example > .env```
+
 ## Установка Windows
 
 Скачать docker toolbox для win 7 или установщик для windows 10.
@@ -39,21 +47,31 @@
 
 Прописать в файле /etc/hosts:
 
-```<docker-machine>	backend```
+```<docker-machine ip>	backend```
+
+```<docker-machine ip>	file```
+
+```<docker-machine ip>	image```
+
+Ввести команду:
+
+```type .env.example > .env```
+
+Или переименовать ```.env.example``` в ```.env```
 
 ## Запуск
 
 Первый запуск выполняется командой (может занять некоторое время):
 
-```sudo docker-compose up --build```
+```docker-compose up --build```
 
 Последующий запуск выполняется командой
 
-```sudo docker-compose up```
+```docker-compose up```
 
 Выключение выполняется командой:
 
-```sudo docker-compose down```
+```docker-compose down```
 
 При запуске приложения выполняется установка зависимостей composer и накатывание миграций.
 
@@ -66,6 +84,14 @@ Frontend часть доступна по адресу:
 Backend часть доступна по адресу:
 
 ```http://backend```
+
+Картинки из папки ```/app/frontend/web/images``` доступны по адресу:
+
+```http://image```
+
+Файлы из папки ```/app/frontend/web/uploads``` доступны по адресу:
+
+```http://file```
 
 Mysql работает на порту 3307, для подключения воспользуйтесь команда:
 
