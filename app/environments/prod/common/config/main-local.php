@@ -11,6 +11,22 @@ return [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'postfix',
+                'username' => 'root',
+                'password' => 'NIXp8Eaw33ZL7k5o',
+                'port' => '587',
+                'encryption' => 'tls',
+                'streamOptions' => [ //Для самоподписанных сертификатов
+                    'ssl' => [
+                        'allow_self_signed' => true,
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                    ],
+                ],
+            ]
         ],
     ],
 ];

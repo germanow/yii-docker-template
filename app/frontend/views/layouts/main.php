@@ -4,11 +4,9 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 ?>
@@ -21,62 +19,100 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link rel="shortcut icon" href="<?php echo Yii::$app->params['domainImage'] . 'favicon.ico' ?>" type="image/x-icon" />
     <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => 'My Company',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+    <header class="header">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="navbar-header">
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                      <!--   <div style="display: block;">Hello</div> -->
+                        <a class="navbar-brand" href="<?= Url::to(['/site/index']) ?>">
+                          <?= Html::img(Yii::$app->params['domainImage'] . 'favicon.ico'); ?>
+                          <p>My company</p>
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <!-- <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a>
+                            </li>
+                        </ul> -->
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><?= Html::a('Home', Url::to(['/site/index'])); ?></li>
+                          <li><?= Html::a('About', Url::to(['/site/about'])); ?></li>
+                          <li><?= Html::a('Contact', Url::to(['/site/contact'])); ?></li>
+                          <?php
+                              if (Yii::$app->user->isGuest) {
+                                  echo '<li>'; 
+                                  echo Html::a('Sign Up', Url::to(['/site/signup'])); 
+                                  echo '</li>';
+                                  echo '<li>'; 
+                                  echo Html::a('Login', Url::to(['/site/login'])); 
+                                  echo '</li>';
+                              } else {
+
+                                  echo '<li>'; 
+                                  echo Html::a('My profile', Url::to(['/user/my-profile'])); 
+                                  echo '</li>';
+
+                                  echo '<li class="face">';
+                                  echo '<div class="image-wrap">'; 
+                                  echo Html::img(Yii::$app->user->identity->getPhotoLink(), ['height' => '40px', 'width' => '40px', 'vspace' => '5px']); 
+                                  echo '</div>';
+                                  echo '</li>';
+
+                                  echo '<li class="logout-li">'; 
+                                  echo Html::beginForm(['/site/logout'], 'post');
+                                  echo Html::submitButton(
+                                      'Logout (' . Yii::$app->user->identity->name . ')',
+                                      ['class' => 'btn btn-link logout']
+                                  );
+                                  echo Html::endForm();
+                                  echo '</li>';
+                       
+                              }
+                          ?>
+                        </ul>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </div>
+                <!-- Brand and toggle get grouped for better mobile display -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+
+    <main>
         <?= Alert::widget() ?>
         <?= $content ?>
-    </div>
-</div>
+    </main>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
-
+<footer>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                  <div class="rw-ui-container"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        Copyright &copy
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4"></div>
+                </div>
+            </div>
+        </div>
+    </footer>
 <?php $this->endBody() ?>
 </body>
 </html>

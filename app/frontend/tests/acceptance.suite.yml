@@ -2,7 +2,7 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://nginx-test
+            url: http://nginx-test-frontend
             browser: chrome
             host: selenium
             port: 4444

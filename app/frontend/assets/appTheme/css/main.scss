@@ -1,0 +1,471 @@
+html,
+body {
+    // background-color: #c0c0c0;
+}
+
+header {
+    .container-fluid {
+        background-color: rgba(146, 208, 80, 1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 10;
+        .navbar-brand {
+            padding: 0;
+            display: block;
+            img {
+                width: 40px;
+                height: 40px;
+                margin: 5px;
+                display: inline-block;
+            }
+            p {
+                display: inline-block;
+                color: #3f3f3f;
+            }
+            &:hover {
+                p {
+                    color: #fff;
+                }
+            }
+        }
+        .navbar-right {
+            li {
+                &:hover {
+                    background-color: #6d9d3d;
+                }
+                &:last-child {
+                    border-color: transparent;
+                }
+                a {
+                    color: #3f3f3f;
+                    text-align: center;
+                    font-size: 17px;
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+            li.face {
+                width: 40px;
+                height: 40px;
+                cursor: pointer;
+                margin: 5px 5px 0 5px;
+                .image-wrap {
+                    position: relative;
+                    width: 40px;
+                    height: 40px;
+                    overflow: hidden;
+                    border-radius: 50%;
+                    img {
+                        width: 100%;
+                        height: auto;
+                        margin: 0;
+                    }
+                }
+                &:hover {
+                    background-color: #92d050;
+                }
+            }
+            li.logout-li {
+                height: 50px;
+                cursor: pointer;
+                form {
+                    padding-top: 6px;
+                    text-align: center;
+                    button.logout {
+                        color: #3f3f3f;
+                        font-size: 17px;
+                    }
+                }
+                &:hover {
+                    button.logout {
+                        background-color: #6d9d3d;
+                        color: #fff;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+        .navbar-toggle {
+            background-color: #6d9d3d;
+            border-radius: 10px;
+        }
+    }
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+}
+
+main {
+
+    .video {
+        display: flex;
+        position: absolute;
+        height: 70%;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        iframe {
+            width: 560px;
+            height: 315px;
+        }
+    }
+}
+
+footer {
+    .container-fluid {
+        .row {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            div {
+                text-align: center;
+            }
+        }
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        background-color: rgba(146, 208, 80, 1);
+        img {
+            max-width: 150px;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        .navbar-right {
+            li {
+                border-bottom: 1px solid #6d9b3d;
+            }
+        }
+    }
+    li.face {
+        display: none;
+    }
+    li.user-qr {
+        display: none;
+    }
+}
+
+@media (max-width: 426px) {
+    main {
+        .video {
+            height: 60%;
+        }
+    }
+}
+
+// ************* Contact.php ************
+.site-contact {
+    text-align: center;
+}
+
+.contact-form {
+    padding-bottom: 50px;
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+    input {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 13px;
+    }
+    label.control-label {
+        display: none;
+    }
+    .button-cust {
+        width: 100px;
+        background: #27AE60;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        &:hover,
+        &:focus {
+            -webkit-box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+        }
+    }
+}
+
+// ************* myprofile.php ************
+.qr-code {
+    padding-bottom: 110px;
+    h3 {
+        display: inline-block;
+    }
+    img {
+        display: inline-block;
+        height: 100px;
+        width: 100px;
+    }
+}
+
+// ************* login.php ************
+.login {
+    padding-bottom: 110px;
+    h1,
+    p {
+        text-align: center;
+    }
+}
+
+// ************* signup.php ************
+.signup {
+    padding-bottom: 600px;
+    h1,
+    h1+p {
+        text-align: center;
+    }
+    #form-signup {
+        max-width: 500px;
+        margin: 50px auto;
+        text-align: center;
+        position: relative;
+        ul {
+            padding-left: 0;
+        }
+        input {
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+        .action-button {
+            width: 100px;
+            background: #27AE60;
+            font-weight: bold;
+            color: white;
+            border: 0 none;
+            border-radius: 1px;
+            cursor: pointer;
+            padding: 10px 5px;
+            margin: 10px 5px;
+            &:hover,
+            &:focus {
+                -webkit-box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+                box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+            }
+        }
+        #progressbar {
+            margin-bottom: 30px;
+            overflow: hidden; // CSS counters to number the steps
+            counter-reset: step;
+            li {
+                list-style-type: none;
+                color: grey;
+                text-transform: uppercase;
+                font-size: 9px;
+                width: 33.3%;
+                float: left;
+                position: relative;
+                &:before {
+                    content: counter(step);
+                    counter-increment: step;
+                    width: 20px;
+                    line-height: 20px;
+                    display: block;
+                    font-size: 10px;
+                    color: black;
+                    background: #92D050;
+                    border-radius: 3px;
+                    margin: 0 auto 5px auto;
+                }
+                &:first-child:after {
+                    //content not needed before the first step
+                    content: none;
+                }
+                &:after {
+                    content: '';
+                    width: 100%;
+                    height: 2px;
+                    background: #92D050;
+                    position: absolute;
+                    left: -50%;
+                    top: 9px;
+                    z-index: -1; //put it behind the numbers
+                }
+            }
+            li.active:before,
+            li.active:after {
+                background: #27AE60;
+                color: white;
+            }
+        }
+        fieldset {
+            border: 0 none;
+            border-radius: 3px;
+            box-shadow: 0 0 15px 1px rgba(0, 0, 0, .4);
+            padding: 20px 30px;
+            box-sizing: border-box;
+            width: 80%;
+            margin: 0 10%;
+            position: absolute;
+            .control-label {
+                display: none;
+            }
+            .fs-title {
+                font-size: 15px;
+                text-transform: uppercase;
+                color: grey;
+                margin-bottom: 10px;
+            }
+            .fs-subtitle {
+                font-size: 13px;
+                text-transform: uppercase;
+                color: #678;
+                margin-bottom: 20px;
+            } // hide all fieldset except first
+            &:not(:first-of-type) {
+                display: none;
+            }
+            div.radio {
+                display: inline;
+                input {
+                    margin-left: -40px;
+                }
+            }
+            .cust {
+                display: inline-block;
+                button {
+                    height: 38px;
+                    width: 100px;
+                    background: #27AE60;
+                    font-weight: bold;
+                    color: white;
+                    border: 0 none;
+                    border-radius: 1px;
+                    cursor: pointer;
+                    padding: 9px 5px;
+                    margin: 10px 5px;
+                    &:hover,
+                    &:focus {
+                        -webkit-box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+                        box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ************* site-about.php ************
+.site-about {
+    padding-bottom: 110px;
+    h1,
+    p {
+        text-align: center;
+    }
+}
+
+// ************* edit.php ************
+.edit {
+    h1 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+    padding-bottom: 50px;
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    position: relative;
+    input {
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 13px;
+    }
+    label.control-label {
+        display: none;
+    }
+    div.radio {
+        display: inline;
+        input {
+            margin-left: -40px;
+        }
+    }
+    .button-cust {
+        width: 100px;
+        background: #27AE60;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 1px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px;
+        &:hover,
+        &:focus {
+            -webkit-box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+        }
+    }
+}
+
+// ************* my-qr.php ************
+.my-qr {
+    h1 {
+        text-align: center;
+        padding-bottom: 20px;
+    }
+    .code {
+        text-align: center;
+        img {
+            max-width: 100%;
+        }
+    }
+}
+
+// ************* my-profile.php ************
+.wrapper {
+    background-color: #f3f1f1;
+}
+
+.my-profile {
+    padding-bottom: 110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24px;
+
+    &__name {}
+    &__photo {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        overflow: hidden;
+        border-radius: 50%;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    &__rating {}
+    &__job-title {}
+    &__working-at {}
+    &__balance {
+        p {
+            border: 1px solid black;
+            padding: 10px 20px 10px 20px;
+            border-radius: 11px;
+        }
+    }
+}

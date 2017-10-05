@@ -44,7 +44,7 @@ class ResetPasswordForm extends Model
     {
         return [
             ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            ['password', 'match', 'pattern' => '/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,64}$/', 'message' => 'The password must contain 8 to 64 characters and at least one digit and upper and lower case letters'],
         ];
     }
 

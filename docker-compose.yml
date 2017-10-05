@@ -15,6 +15,8 @@ services:
         build:
             context: ./docker/dev
             dockerfile: Dockerfile-nginx-test-frontend
+        ports: 
+            - "8080:80"
         volumes:
             - ./app:/app
             - ./docker/dev/nginx-test-frontend.conf.d:/etc/nginx/conf.d

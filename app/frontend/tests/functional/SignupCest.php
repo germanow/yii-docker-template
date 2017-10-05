@@ -2,6 +2,7 @@
 
 namespace frontend\tests\functional;
 
+use Yii;
 use frontend\tests\FunctionalTester;
 
 class SignupCest
@@ -19,39 +20,42 @@ class SignupCest
         $I->see('Signup', 'h1');
         $I->see('Please fill out the following fields to signup:');
         $I->submitForm($this->formId, []);
-        $I->seeValidationError('Username cannot be blank.');
         $I->seeValidationError('Email cannot be blank.');
-        $I->seeValidationError('Password cannot be blank.');
-
     }
 
     public function signupWithWrongEmail(FunctionalTester $I)
     {
         $I->submitForm(
             $this->formId, [
-            'SignupForm[username]'  => 'tester',
+            'SignupForm[name]'  => 'tester',
             'SignupForm[email]'     => 'ttttt',
-            'SignupForm[password]'  => 'tester_password',
         ]
         );
-        $I->dontSee('Username cannot be blank.', '.help-block');
-        $I->dontSee('Password cannot be blank.', '.help-block');
+        $I->dontSee('name cannot be blank.', '.help-block');
         $I->see('Email is not a valid email address.', '.help-block');
     }
 
     public function signupSuccessfully(FunctionalTester $I)
     {
+        $email = 'tester.email@example.com';
+        $I->attachFile('input[id="signupform-photo"]', 'photo.jpg');
         $I->submitForm($this->formId, [
-            'SignupForm[username]' => 'tester',
-            'SignupForm[email]' => 'tester.email@example.com',
-            'SignupForm[password]' => 'tester_password',
+            'SignupForm[name]' => 'tester',
+            'SignupForm[email]' => $email,
+            'SignupForm[password]' => 'password_0',
         ]);
-
+        
         $I->seeRecord('common\models\User', [
-            'username' => 'tester',
-            'email' => 'tester.email@example.com',
+            'name' => 'tester',
+            'email' => $email,
+            'photo' => '1995c0ea1de4292e35d19a75166680fc',
         ]);
 
-        $I->see('Logout (tester)', 'form button[type=submit]');
+        $emailMessage = $I->grabLastSentEmail();
+        expect('valid email is sent', $emailMessage)->isInstanceOf('yii\mail\MessageInterface');
+        expect($emailMessage->getTo())->hasKey($email);
+        expect($emailMessage->getFrom())->hasKey(Yii::$app->params['notifyEmail']);
+        expect($emailMessage->toString())->contains('tester');
+        $I->seeCurrentUrlEquals('/site/login');
     }
 }

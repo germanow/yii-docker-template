@@ -8,10 +8,12 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
+use common\models\SignupForm;
+use common\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use common\classes\MyUploadedFile;
+use common\models\User;
 
 /**
  * Site controller
@@ -36,7 +38,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['logout'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [User::ROLE_USER],
                     ],
                 ],
             ],
@@ -141,6 +143,7 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
+    
     /**
      * Signs user up.
      *
@@ -150,10 +153,9 @@ class SiteController extends Controller
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
+            $model->photo = MyUploadedFile::getInstance($model, 'photo');
+            if ($model->signup()) {
+                $this->redirect(['site/login']);
             }
         }
 

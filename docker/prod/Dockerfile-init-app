@@ -15,4 +15,4 @@ VOLUME /app
 
 WORKDIR /app
 #Production enviroment init and migrate/up
-CMD ["/bin/sh", "-c", "echo Migration wait 15 sec && sleep 15 && /app/init --env=Production --overwrite=No && /app/yii migrate/up --interactive=0"]
+CMD ["/bin/sh", "-c", "echo Migration wait 15 sec && sleep 15 && /app/init --env=Production --overwrite=No && /app/yii migrate/up --interactive=0 && /app/yii rbac/init && rm -rf /app/frontend/web/assets/* && rm -rf /app/backend/web/assets/*"]

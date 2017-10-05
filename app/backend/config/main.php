@@ -13,6 +13,9 @@ return [
     'bootstrap' => ['log'],
     'modules' => [],
     'components' => [
+        'assetManager' => [
+            'forceCopy' => YII_DEBUG ? true : false
+        ],
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],

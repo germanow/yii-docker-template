@@ -21,4 +21,4 @@ RUN chmod +x /idle.sh
 
 RUN echo test-frontend nginx >> /etc/hosts
 
-CMD ["/bin/sh", "-c", "echo Migration_test wait 20 sec && sleep 20 && /app/yii_test_migrate migrate/up --interactive=0 && /app/vendor/bin/codecept build && /idle.sh"]
+CMD ["/bin/sh", "-c", "echo Migration_test wait 20 sec && sleep 20 && /app/yii_test_migrate migrate/up --interactive=0 && /app/vendor/bin/codecept build && /app/yii_test rbac/init && /idle.sh"]

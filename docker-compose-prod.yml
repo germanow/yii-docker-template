@@ -30,6 +30,7 @@ services:
         depends_on:
             - composer
             - mysql
+            - postfix
         restart: on-failure
     composer:
         build:
@@ -47,6 +48,16 @@ services:
         volumes:
             - ./docker/runtime/mysql:/var/lib/mysql
             - ./docker/prod/mysql.conf.d:/etc/mysql/conf.d
+        env_file: .env
         restart: on-failure 
-        env_file: ./docker/prod/.env
-            
+    postfix:
+        build:
+            context: ./docker/prod
+            dockerfile: Dockerfile-postfix
+        ports: 
+            - "587:587"
+        volumes:
+            - ./docker/prod/assets/domainkeys:/etc/opendkim/domainkeys
+            - ./docker/prod/assets/certs:/etc/postfix/certs
+        env_file: .env
+        restart: on-failure
