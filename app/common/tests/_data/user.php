@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'ivan' => [
+    [
         'id' => 1,
         'name' => 'ivan',
         'auth_key' => 'iwTNae9t34OmnK6l4vT4IeaTk-YWI2Rv',
@@ -11,25 +11,10 @@ return [
         'email' => 'ivan@mail.com',
         'created_at' => '1391885313',
         'updated_at' => '1391885313',
-        
-        'workingAt' => 'DSEA',
-        'jobTitle' => 'developer',
-        'smallTip' => '1',
-        'mediumTip' => '2',
-        'highTip' => '3',
-        'otherTip' => '4',
-        'nameOnAccount' => 'nameOnAccount',
-        'account' => '12345',
-        'bankRouting' => '123456789',
-        'depositPreference' => 'daily',
+               
         'photo' => '1995c0ea1de4292e35d19a75166680fc',
-        'qr' => '1996c0ea1de4292e35d19a75166680fc',
-        'access_token' => 'EdKfXrx88weFMV0vIxuTMWKgfK2tS3Lp',
-        'ratingSum' => 10,
-        'ratingCount' => 2,
-        'balance' => '777.77',
     ],
-    'goha' => [
+    [
         'id' => 2,
         'name' => 'goha',
         'auth_key' => 'iwTNae9t34OmnK6l3vT4IeaTk-YWI2Rv',
@@ -40,21 +25,6 @@ return [
         'created_at' => '1391885313',
         'updated_at' => '1391885313',
         
-        'workingAt' => 'DSEA',
-        'jobTitle' => 'developer',
-        'smallTip' => '1',
-        'mediumTip' => '2',
-        'highTip' => '3',
-        'otherTip' => '4',
-        'nameOnAccount' => 'nameOnAccount',
-        'account' => '12345',
-        'bankRouting' => '123456789',
-        'depositPreference' => 'daily',
         'photo' => '1995c0ea1de4292e35d12a75166680fc',
-        'qr' => '1996c0ea1de4292e35d19a75166680fc',
-        'access_token' => 'FjK9Xrx99weFMV0fIxuTM9KgfK2tS4Lp',
-        'ratingSum' => 10,
-        'ratingCount' => 2,
-        'balance' => '1.23',
     ],
 ];
